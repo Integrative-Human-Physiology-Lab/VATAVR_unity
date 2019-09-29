@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "260707015158",
+    "firebase_url": "https://vatavr-90af0.firebaseio.com",
+    "project_id": "vatavr-90af0",
+    "storage_bucket": "vatavr-90af0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260707015158:android:bd95037d110c5ca5274fd7",
+        "android_client_info": {
+          "package_name": "com.VATA.VATAVR"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260707015158-vqbgv22e9hbtaueseqopcf7sd0ivebd4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeiKkFpVtEuzWYOLcrwh7HCJOxkbjUCRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260707015158-vqbgv22e9hbtaueseqopcf7sd0ivebd4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
