@@ -1,0 +1,19 @@
+VATAVR
+
+Required Hardware:
+	1. Daydream View
+	2. Daydream ready phone (complete list here: https://www.vrbound.com/guides/guide-to-daydream-ready-phones)
+
+Required apps:
+	1. Daydream app
+	2. VATAVR app
+
+Instructions for running:
+	1. Open the VATAVR app and run normally
+	2. Trackpad on the controller controls movement and rotation of the bar.
+	3. Once the user is satisfied with his/her placement, click the app button (has a minus sign on it) to confirm that trial.
+	4. After 20 trials of each, the app will automatically close once the user clicks the app button again.
+
+Instructions for accessing data:
+	1. Navigate to storage settings on the phone, and access the files. (Settings->Storage->Files->Android->data->com.VATA.VATAVR)
+	2. Inside of the com.VATA.VATAVR folder, you'll see csvs with the time and date. (e.g. files05-10-20_12-17-2019.csv implies 5:10:20 on 12/17/2019)

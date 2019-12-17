@@ -477,7 +477,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939662624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.25, y: 0.04, z: 37.2}
+  m_LocalPosition: {x: -12.25, y: 0, z: 37.2}
   m_LocalScale: {x: 24, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 959308593}
@@ -656,7 +656,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 1
+  m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -958,7 +958,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416166388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5104167, y: 0.13333319, z: 0}
+  m_LocalPosition: {x: 0.5104167, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 71583873}
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   right: {fileID: 71583873}
   left: {fileID: 939662625}
-  numTrials: 5
+  numTrials: 20
   congrats: {fileID: 334452534}
   speed: 1
   mode: 0

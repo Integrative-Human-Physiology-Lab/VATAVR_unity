@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.IO;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase;
@@ -8,7 +11,7 @@ using Firebase.Unity.Editor;
 
 public class EventController : MonoBehaviour
 {
-
+    private List<string[]> rowData = new List<string[]>();
     public Transform right;
     public Transform left;
     public int numTrials = 5;
@@ -35,8 +38,8 @@ public class EventController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://vatavr-90af0.firebaseio.com");
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
+        //FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://vatavr-90af0.firebaseio.com");
+        //reference = FirebaseDatabase.DefaultInstance.RootReference;
         vertical = new float[numTrials];
         tangential = new float[numTrials];
         congrats.text = "";
@@ -117,7 +120,7 @@ public class EventController : MonoBehaviour
                 tIndex++;
                 if (tIndex == numTrials) {
                     done = true;//show final score
-                    congrats.text = "Great Job Gen! View your dashboard for your results.";
+                    //congrats.text = "Great Job! View your dashboard for your results.";
                     //push the values
                 }
             }
@@ -130,19 +133,63 @@ public class EventController : MonoBehaviour
 
     void Close() {
         //push the values
-        writeNewData();
+        //writeNewData();
+        //make csv and save it
+        saveData();
         Application.Quit();
     }
 
     void ResetVertical() { //between -15 and 15 for y
         
-        right.localPosition = new Vector3(0f, Random.Range(-15f,15f), 37.2f);
+        right.localPosition = new Vector3(0f, UnityEngine.Random.Range(-15f,15f), 37.2f);
     }
     
     void ResetTangential() {
         right.localPosition = new Vector3(0f, 0f, 37.2f);
-        Vector3 euler = new Vector3(0f, 0f, Random.Range(-45f,45f));
+        Vector3 euler = new Vector3(0f, 0f, UnityEngine.Random.Range(-45f,45f));
         right.localRotation = Quaternion.Euler(euler);
+    }
+
+    void saveData()
+    {
+
+        // Creating First row of titles manually..
+        string[] rowDataTemp = new string[3];
+        rowDataTemp[0] = "Trial Number";
+        rowDataTemp[1] = "Vertical";
+        rowDataTemp[2] = "Tangential";
+        rowData.Add(rowDataTemp);
+
+        // You can add up the values in as many cells as you want.
+        for (int i = 0; i < numTrials; i++)
+        {
+            rowDataTemp = new string[3];
+            rowDataTemp[0] = "" + (i + 1); // name
+            rowDataTemp[1] = "" + vertical[i]; // ID
+            rowDataTemp[2] = "" + tangential[i]; // Income
+            rowData.Add(rowDataTemp);
+        }
+
+        string[][] output = new string[rowData.Count][];
+
+        for (int i = 0; i < output.Length; i++)
+        {
+            output[i] = rowData[i];
+        }
+
+        int length = output.GetLength(0);
+        string delimiter = ",";
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int index = 0; index < length; index++)
+            sb.AppendLine(string.Join(delimiter, output[index]));
+        string time = System.DateTime.Now.ToString("hh:mm:ss").Replace(':', '-');
+        string date = System.DateTime.Now.ToString("MM/dd/yyyy").Replace('/', '-');
+        string filePath = Application.persistentDataPath + time + "_" + date + ".csv";
+        StreamWriter outStream = System.IO.File.CreateText(filePath);
+        outStream.WriteLine(sb);
+        outStream.Close();
     }
 
     //private void PostToDatabase()
@@ -151,28 +198,28 @@ public class EventController : MonoBehaviour
     //    RestClient.Put("https://vatavr-90af0.firebaseio.com" + playerName + ".json", user);
     //}
 
-    private void writeNewData()
-    {
-        string username = "meme";
-        //string name = "Shannon Ke";
-        //string email = "shannonke@gech.edu";
-        string time = System.DateTime.Now.ToString("hh:mm:ss");
-        string date = System.DateTime.Now.ToString("MM/dd/yyyy").Replace('/', '-');
+    //private void writeNewData()
+    //{
+    //    string username = "meme";
+    //    //string name = "Shannon Ke";
+    //    //string email = "shannonke@gech.edu";
+    //    string time = System.DateTime.Now.ToString("hh:mm:ss");
+    //    string date = System.DateTime.Now.ToString("MM/dd/yyyy").Replace('/', '-');
 
-        Result result = new Result(vertical, tangential);
+    //    Result result = new Result(vertical, tangential);
 
-        string json = JsonUtility.ToJson(result);
+    //    string json = JsonUtility.ToJson(result);
 
-        //reference.Child("results").Child(username).Child(time).SetRawJsonValueAsync(json);
-        for (int i = 0; i < vertical.Length; i++) {
-            reference.Child("results").Child(username).Child(date).Child("v" + i).SetValueAsync(vertical[i]);
-        }
-        for (int i = 0; i < tangential.Length; i++)
-        {
-            reference.Child("results").Child(username).Child(date).Child("t" + i).SetValueAsync(tangential[i]);
-        }
+    //    //reference.Child("results").Child(username).Child(time).SetRawJsonValueAsync(json);
+    //    for (int i = 0; i < vertical.Length; i++) {
+    //        reference.Child("results").Child(username).Child(date).Child("v" + i).SetValueAsync(vertical[i]);
+    //    }
+    //    for (int i = 0; i < tangential.Length; i++)
+    //    {
+    //        reference.Child("results").Child(username).Child(date).Child("t" + i).SetValueAsync(tangential[i]);
+    //    }
 
-    }
+    //}
 
     public class Result
     {
